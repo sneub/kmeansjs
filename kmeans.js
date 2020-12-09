@@ -120,3 +120,19 @@ Kmeans.prototype.distance = function(v1, v2) {
 
   return Math.sqrt(total)
 }
+
+Kmeans.prototype.predict = function(data) {
+  var centroids = Object.values(this.centroids)
+  var min = Infinity
+  var classificationIndex
+
+  for (var i in centroids) {
+    var distance = this.distance(centroids[i], data)
+    if (distance < min) {
+      min = distance
+      classificationIndex = i
+    }
+  }
+
+  return centroids[classificationIndex]
+}
